@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="传输层协议分析">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-29T12:06:40.536Z">
+<meta property="og:updated_time" content="2020-03-27T01:04:14.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="computer-network">
 <meta name="twitter:description" content="传输层协议分析">
@@ -186,7 +186,7 @@
 <p>S5. 服务端收到客户端的收到确认的报文，连接建立。</p>
 <p>三次握手实际上是为了方式失效的连接请求到达服务器，然后服务器错误的打开连接。</p>
 <h2><span id="tcp四次挥手">TCP四次挥手</span></h2><p>S1. 客户端发送连接释放报文，FIN = 1。</p>
-<p>S2. 服务端收到后发出确认报文，此时TCP连接时半关闭状态，服务端能单向给客户端发送数据。</p>
+<p>S2. 服务端收到后发出确认报文，此时TCP连接时半关闭状态，服务端能单向给客户端发送数据。客户端进入CLOSE_WAIT状态。</p>
 <p>S3. 当服务端决定释放连接时，向客户端发送释放报文，FIN = 1</p>
 <p>S4. 客户端收到后向服务端发送确认报文，进入TIME-WAIT状态，等待报文最大存活时间后释放连接。</p>
 <p>当服务端收到确认后彻底释放连接。</p>
@@ -483,6 +483,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">

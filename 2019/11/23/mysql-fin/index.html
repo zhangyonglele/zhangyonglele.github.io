@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MySQL总结 | YLZhang&#39;s blog</title>
+  <title>MySQL底层索引结构分析 | YLZhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事务什么是事务 平常我们使用的的一条一条的语句也是事务，一条sql语句是事务的子集。 事务具有ACID性质，分别是原子性，一致性，隔离性，持续性。  事务的使用解除日常使用的自动提交限制； 隔离级别：有四种，不难，再去了解。 阅读我的文章“乐观锁和悲观锁”。 锁机制因为在任何的系统中，只有读和写操作是原子的，所以需要锁机制保证这次的数据操作是正确的，一致的，保持隔离的，使用适当的锁机制来保证这些操">
+  <meta name="description" content="MySQL有两种常用的引擎，他们实现索引的数据结构相同，但实现方法却不同">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL总结">
+<meta property="og:title" content="MySQL底层索引结构分析">
 <meta property="og:url" content="http://yoursite.com/2019/11/23/mysql-fin/index.html">
 <meta property="og:site_name" content="YLZhang&#39;s blog">
-<meta property="og:description" content="事务什么是事务 平常我们使用的的一条一条的语句也是事务，一条sql语句是事务的子集。 事务具有ACID性质，分别是原子性，一致性，隔离性，持续性。  事务的使用解除日常使用的自动提交限制； 隔离级别：有四种，不难，再去了解。 阅读我的文章“乐观锁和悲观锁”。 锁机制因为在任何的系统中，只有读和写操作是原子的，所以需要锁机制保证这次的数据操作是正确的，一致的，保持隔离的，使用适当的锁机制来保证这些操">
+<meta property="og:description" content="MySQL有两种常用的引擎，他们实现索引的数据结构相同，但实现方法却不同">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-23T10:43:44.131Z">
+<meta property="og:image" content="http://yoursite.com/img/innodb.png">
+<meta property="og:image" content="http://yoursite.com/img/myisam.png">
+<meta property="og:image" content="http://yoursite.com/img/b-tree.png">
+<meta property="og:image" content="http://yoursite.com/img/b+tree.png">
+<meta property="og:updated_time" content="2020-03-29T01:52:11.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL总结">
-<meta name="twitter:description" content="事务什么是事务 平常我们使用的的一条一条的语句也是事务，一条sql语句是事务的子集。 事务具有ACID性质，分别是原子性，一致性，隔离性，持续性。  事务的使用解除日常使用的自动提交限制； 隔离级别：有四种，不难，再去了解。 阅读我的文章“乐观锁和悲观锁”。 锁机制因为在任何的系统中，只有读和写操作是原子的，所以需要锁机制保证这次的数据操作是正确的，一致的，保持隔离的，使用适当的锁机制来保证这些操">
+<meta name="twitter:title" content="MySQL底层索引结构分析">
+<meta name="twitter:description" content="MySQL有两种常用的引擎，他们实现索引的数据结构相同，但实现方法却不同">
+<meta name="twitter:image" content="http://yoursite.com/img/innodb.png">
   
     <link rel="alternative" href="/atom.xml" title="YLZhang&#39;s blog" type="application/atom+xml">
   
@@ -162,7 +167,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL总结
+      MySQL底层索引结构分析
     </h1>
   
 
@@ -175,18 +180,61 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="事务">事务</span></h1><h2><span id="什么是事务">什么是事务</span></h2><ol>
-<li>平常我们使用的的一条一条的语句也是事务，一条sql语句是事务的子集。</li>
-<li>事务具有ACID性质，分别是原子性，一致性，隔离性，持续性。</li>
+        <p>MySQL有两种常用的引擎，他们实现索引的数据结构相同，但实现方法却不同<br><a id="more"></a></p>
+<h2><span id="聚簇索引-和-非聚簇索引">聚簇索引 和 非聚簇索引</span></h2><h3><span id="聚簇索引是什么">聚簇索引是什么？</span></h3><p>聚簇索引是将数据与索引结构放在一起，找到索引的同时也找到了数据。</p>
+<p>而非聚簇索引则是索引和数据分离，索引的最终叶子节点存放了指向数据对应行的指针。</p>
+<p><strong>聚簇索引具有唯一性。</strong></p>
+<p>由于数据和索引放在一起，所以一份数据表只能存放一份和数据在一起的索引。</p>
+<h3><span id="各个索引的搜索过程">各个索引的搜索过程</span></h3><p>在Innodb中，在聚簇索引之上创建的索引都称为辅助索引，辅助索引总是需要二次查找的。非聚簇索引都是辅助索引，比如说复合索引，唯一索引，前缀索引等，都在innodb中属于辅助索引，此时叶子节点存储的值并不是行位置的指针，而是主键值和字段值。</p>
+<p>Innodb中的搜索过程如下：</p>
+<p><img src="/img/innodb.png" alt="Inoodb搜索过程"></p>
+<p>图中，<strong>红色</strong>的搜索过程为聚簇索引的搜索过程，<strong>绿色</strong>的搜索过程为非聚簇索引的搜索过程。</p>
+<p>可以发现，当数据按照B+Tree组织起来时，行数据就直接存储在叶子节点上，当按照主键搜索时，就直接按照B+tree的检索算法就可以找到数据了。在图中用红色代表出来。</p>
+<p>如果对其他辅助索引进行搜索，则需要两个步骤，首先在辅助索引中搜索字段的要求，然后在其叶子节点中获取到主键值，第二步再从聚簇索引中在进行一次搜索，获取到整个行的数据。在图中的流程用绿色表达出来。</p>
+<p>而在MyISAM引擎中则不同，在该引擎中使用的时非聚簇索引，所以他的各种搜索过程都是类似的。</p>
+<p><img src="/img/myisam.png" alt="MyIsam搜索过程"></p>
+<p>在此引擎中，无论是不是主键，搜索过程都是一次的，不需要二次访问主键构成的索引树。</p>
+<h2><span id="索引数据结构的筛选前导">索引数据结构的筛选前导</span></h2><p>在筛选索引的时候，B+Tree在没有被优化时是B-tree。</p>
+<h3><span id="b-tree">B-Tree</span></h3><p>这种数据结构有些特色：</p>
+<ul>
+<li>首先是当某个节点的数据数量超过阈值将会自我分裂，产生下级节点</li>
+<li>叶子节点的深度相同</li>
+<li>叶子节点的指针为空</li>
+<li>节点中数据的key从左到右递增</li>
+</ul>
+<p>结构是这样的：</p>
+<p><img src="/img/b-tree.png" alt="b-tree"></p>
+<p>我们可以发现，数据和索引是放在同一个节点的。</p>
+<p>可以从上面索引的角度上来说，这种结构应该是被淘汰了，分析一下淘汰的原因：</p>
+<p>虽然单条查找非常快，但是处理多条数据的时候，就会出现必须每次都要从根节点搜索的问题，而在数据库操作中常常是范围查找的，所以需要对该结构优化。</p>
+<h3><span id="btree">B+Tree</span></h3><p>为了优化范围查找的问题，我们必须要将被上了索引的地方连起来，把不连续的地方用指针连起来，为了指针指向的有序性，就不能再将数据存储在每个中间节点中，如果把数据和索引存储在叶子节点中，就可以有序的指向不连续的节点了。</p>
+<p>那么要做的操作：</p>
+<ol>
+<li>需要我们将索引和数据节点放在底层的叶子节点上，同时保持部分B-Tree的特性。</li>
+<li>我们需要将不连续的叶子节点连起来</li>
 </ol>
-<h2><span id="事务的使用">事务的使用</span></h2><p>解除日常使用的自动提交限制；</p>
-<p>隔离级别：有四种，不难，再去了解。</p>
-<p>阅读我的文章“乐观锁和悲观锁”。</p>
-<h1><span id="锁机制">锁机制</span></h1><p>因为在任何的系统中，只有读和写操作是原子的，所以需要锁机制保证这次的数据操作是正确的，一致的，保持隔离的，使用适当的锁机制来保证这些操作。</p>
-<p>举一个著名的二段锁协议的C++版本例子，来说明，两端锁协议就是可以往上加锁，但是一旦释放，就不能再加锁了。</p>
-<h1><span id="索引">索引</span></h1><p>底层默认数据结构：BTREE</p>
-<p>推荐的加索引方法：除了主键外，在where上的，在外键上的都可以加锁</p>
-<h1><span id="sql语句优化">sql语句优化</span></h1><h2><span id="前两篇文章">前两篇文章</span></h2><h2><span id="活用explain">活用explain</span></h2>
+<p>所以我们改进之后的数据结构将如下图所示：</p>
+<p><img src="/img/b+tree.png" alt="b+tree"></p>
+<p>我们完成了改造后，这就是MySQL索引的基本结构。</p>
+<h2><span id="myisam-和-innodb索引的底层原理">MyISAM 和 Innodb索引的底层原理</span></h2><h3><span id="myisam">MyISAM</span></h3><p>在MyISAM中使用的是非聚簇索引，索引文件和数据文件分离，索引文件最后存储的是指向数据文件中行数据的指针。</p>
+<h4><span id="主键索引和辅助索引">主键索引和辅助索引</span></h4><p>MyISAM中，主键索引和非主键索引都是非聚簇索引，所以他们的存储方式都是以上所说的方法。</p>
+<h3><span id="innodb">Innodb</span></h3><p>在Innodb中，索引和数据文件在同一个文件中，辅助索引为主键索引服务。</p>
+<h4><span id="主键索引">主键索引</span></h4><p>主键索引使用聚簇索引，使用B+Tree组织数据，并且在叶子节点中直接存储数据信息。</p>
+<h4><span id="辅助索引">辅助索引</span></h4><p>Innodb的辅助索引建立在主键索引之上，使用非聚簇索引，叶子节点中存储的是索引字段的值和对应的主键。查询过程见本文最上方。</p>
+<p>为什么要在这里存储主键值而不是行地址指针呢？</p>
+<p>因为如果对主键索引的某种修改可能导致表结构和地址的变化，如果使用行地址指针，会让更新数据变得十分复杂。</p>
+<p>而使用指向主键值，对辅助索引在更新时就不用更新了，只需要更新主键索引就可以了。</p>
+<h4><span id="innodb需要注意的">Innodb需要注意的</span></h4><ul>
+<li>数据文件和索引文件在一起</li>
+<li>直接按照B+Tree组织</li>
+<li>聚簇索引的叶子节点直接包含完整行数据</li>
+<li>Innodb必须要有主键，并且推荐自增主键</li>
+</ul>
+<blockquote>
+<p>为什么要使用自增主键呢？</p>
+<p>ANS: 因为自增主键在插入操作时不会u主动破坏书的结构，使用非递增主键会破坏结构，可能会导致插入复杂度上升。</p>
+</blockquote>
+
       
 
       
@@ -468,6 +516,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">

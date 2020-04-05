@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Java工厂模式 | YLZhang&#39;s blog</title>
+  <title>Java工厂模式 与 抽象工厂模式 | YLZhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。 通过一个接口，某些继承这些接口的类不进行主动实例化，而是通过一个“工厂”来决定生产什么类，调用工厂的地方只需要指定实例化哪一个类就可以了。">
+  <meta name="description" content="工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java工厂模式">
+<meta property="og:title" content="Java工厂模式 与 抽象工厂模式">
 <meta property="og:url" content="http://yoursite.com/2020/03/22/java-factory/index.html">
 <meta property="og:site_name" content="YLZhang&#39;s blog">
-<meta property="og:description" content="工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。 通过一个接口，某些继承这些接口的类不进行主动实例化，而是通过一个“工厂”来决定生产什么类，调用工厂的地方只需要指定实例化哪一个类就可以了。">
+<meta property="og:description" content="工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-23T09:58:14.457Z">
+<meta property="og:image" content="http://yoursite.com/img/factory.jpg">
+<meta property="og:updated_time" content="2020-03-28T17:12:38.402Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java工厂模式">
-<meta name="twitter:description" content="工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。 通过一个接口，某些继承这些接口的类不进行主动实例化，而是通过一个“工厂”来决定生产什么类，调用工厂的地方只需要指定实例化哪一个类就可以了。">
+<meta name="twitter:title" content="Java工厂模式 与 抽象工厂模式">
+<meta name="twitter:description" content="工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。">
+<meta name="twitter:image" content="http://yoursite.com/img/factory.jpg">
   
     <link rel="alternative" href="/atom.xml" title="YLZhang&#39;s blog" type="application/atom+xml">
   
@@ -162,7 +164,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Java工厂模式
+      Java工厂模式 与 抽象工厂模式
     </h1>
   
 
@@ -175,8 +177,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。</p>
-<p>通过一个接口，某些继承这些接口的类不进行主动实例化，而是通过一个“工厂”来决定生产什么类，调用工厂的地方只需要指定实例化哪一个类就可以了。</p>
+        <p>工厂模式的核心思想是延后实例化时间，让创建对象这个过程延迟到子类进行。从而不用知道具体是哪个类进行的实例化，也不用了解这个类实例化需要的参数和具体过程。我们只用知道这个类的名称就可以来进行实例化了。<br><a id="more"></a><br>通过一个接口，某些继承这些接口的类不进行主动实例化，而是通过一个“工厂”来决定生产什么类，调用工厂的地方只需要指定实例化哪一个类就可以了。</p>
+<h2><span id="传统工厂类型">传统工厂类型</span></h2><p>传统工厂类型，通过定义一个通用接口，让其他继承此接口的类被一个公用工厂实例化。不需要知道每个类是如何实例化或者类确切的名字。</p>
+<p><img src="/img/factory.jpg" alt="factory"></p>
+<p>让我们用代码实现他，同时使用枚举类来优化工厂创建过程。</p>
+<p>定义接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TV</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义两种不同品牌的TV<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HuaweiTV</span> <span class="keyword">implements</span> <span class="title">TV</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HuaweiTV</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"HWproduct ID id"</span> + ID);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Huawei Showing"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XiaoMiTV</span> <span class="keyword">implements</span> <span class="title">TV</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XiaoMiTV</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Miproduct ID id"</span> + ID);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"XiaoMi Showing"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后为了防止外部调用者知道内部构造实现，我们使用工厂封装其创建过程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> TVFactory&#123;</span><br><span class="line">    HuaweiTV,XiaoMiTV;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TV <span class="title">newTV</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">switch</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">            <span class="keyword">case</span> HuaweiTV:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> HaweiTV(<span class="number">9930</span>);</span><br><span class="line">            <span class="keyword">case</span> XiaoMiTV:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> XiaoMiTV(<span class="number">3270</span>);</span><br><span class="line">            <span class="keyword">default</span> :</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">"无效参数"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在外部调用工厂类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    TVFactory.HuaweiTV.newTV().show();;</span><br><span class="line">    TVFactory.XiaoMiTV.newTV().show();;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>得到结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HWproduct ID id9930</span><br><span class="line">Huawei Showing</span><br><span class="line">Miproduct ID id3270</span><br><span class="line">XiaoMi Showing</span><br></pre></td></tr></table></figure></p>
+<h2><span id="抽象工厂类型">抽象工厂类型</span></h2><p>抽象工厂模式实际上是一种工厂的工厂，它定义了一个工厂的规范，当某个类继承了某个接口或是抽象类，便是继承了某一种工厂规范，继承了这种工厂规范，便需要实现工厂规范中设计的产品。</p>
+<p>我们同样以H厂和M厂来举例子。</p>
+<p>首先定义工厂规范，除了TV以外，这两个厂子还生产Phone。TV我们沿用上面定义的TV</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Phone</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">call</span><span class="params">(<span class="keyword">int</span> tel)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HuaweiPhone</span> <span class="keyword">implements</span> <span class="title">Phone</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HuaweiPhone</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"HW Phone ID id"</span> + ID);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(<span class="keyword">int</span> tel)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Huawei call the number:"</span> + tel);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XiaoMiPhone</span> <span class="keyword">implements</span> <span class="title">Phone</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XiaoMiPhone</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Mi Phone ID id"</span> + ID);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"XiaoMi call the number:"</span> + tel);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以定义一种工厂叫做EEFactory，用于生产手机和电视。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">EEFactory</span></span>&#123;</span><br><span class="line">    <span class="function">Phone <span class="title">makePhone</span><span class="params">(<span class="keyword">int</span> ID)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">TV <span class="title">makeTV</span><span class="params">(<span class="keyword">int</span> ID)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来定义H家和M家不同的工厂。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HuaweiFactory</span> <span class="keyword">implements</span> <span class="title">EEFactory</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">makePhone</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HuaweiPhone(ID);</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">makeTV</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HuaweiTV(ID);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XiaoMiFactory</span> <span class="keyword">implements</span> <span class="title">EEFactory</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Phone <span class="title">makePhone</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> XiaoMiPhone(ID);</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">makeTV</span><span class="params">(<span class="keyword">int</span> ID)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> XiaoMiTV(ID);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以通过EE工厂来接受H家的工厂和M家的工厂来实例化对象啦，同样可以采用上面的方式，也就是枚举类+内部类的方式来优化抽象工厂模式，让EE工厂成为一个枚举类，在通过将两家的实体工厂内部成为静态方法，静态就可实例化对象，非常的方便。</p>
 
       
 
@@ -280,6 +302,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/03/29/my-mvc-framework-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          my-mvc-framework-3
+        
+      </div>
+    </a>
   
   
     <a href="/2020/03/21/my-mvc-framework-2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -450,6 +481,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">

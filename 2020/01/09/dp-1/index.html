@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="假期动态规划刷题笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-10T17:41:32.791Z">
+<meta property="og:updated_time" content="2020-03-24T14:35:54.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划笔记">
 <meta name="twitter:description" content="假期动态规划刷题笔记">
@@ -208,6 +208,11 @@
 <li><a href="#代码实现-1">代码实现</a></li>
 </ul>
 </li>
+<li><a href="#打家劫舍leetcode198">打家劫舍,leetcode.198</a><ul>
+<li><a href="#解题思路-5">解题思路</a></li>
+<li><a href="#代码实现-2">代码实现</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 <h3><span id="最大子序列和">最大子序列和</span></h3><p>(LeetCode#53)</p>
@@ -271,6 +276,15 @@
 <p>dp[n] = min( min(dp[n - (one of the sqrt number)]+1) ,min)</p>
 <p>也就是说在里面找到一种最佳情况，需要从最接近n的完全平方数开始遍历。</p>
 <h4><span id="代码实现">代码实现</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numSquares</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> temp = <span class="number">2</span>;temp &lt;= n;temp++)&#123;</span><br><span class="line">            <span class="keyword">int</span> min = <span class="number">99999999</span>;</span><br><span class="line">            <span class="keyword">int</span> minSqrt = (<span class="keyword">int</span>)Math.sqrt(temp);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> incr = minSqrt;incr &gt; <span class="number">0</span>;incr--)&#123;</span><br><span class="line">                min = Math.min(dp[temp-incr*incr]+<span class="number">1</span>,min);</span><br><span class="line">            &#125;</span><br><span class="line">            dp[temp] = min;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="打家劫舍leetcode198">打家劫舍,leetcode.198</span></h3><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
+<h4><span id="解题思路">解题思路</span></h4><p>这道题的解题思路其实比较简单，动态规划即可。</p>
+<p>设dp[n]为在第n个房子处能偷到的最大的钱数，那么就有两种可能行，偷上家，和不偷上家。偷上家，那么这家就不能偷；不偷商家，那这家就能偷。这两种情况那种偷的多，就选择哪种。</p>
+<p>首先边界条件，如果只有一个房子，那么dp[0] = nums[0];</p>
+<p>如果有两个房子，那么dp[1] = Max(nums[0],nums[1]);</p>
+<p>当n&gt;2时：</p>
+<p>dp[n] = max(dp[n-1],dp[n-2] + nums[n]),即选择要不要偷上家。</p>
+<h4><span id="代码实现">代码实现</span></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length &lt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    dp[<span class="number">1</span>] = nums[<span class="number">1</span>] &gt; nums[<span class="number">0</span>]?nums[<span class="number">1</span>]:nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> temp = <span class="number">2</span>;temp &lt; nums.length;temp++)&#123;</span><br><span class="line">        dp[temp] = Math.max(dp[temp - <span class="number">1</span>],dp[temp - <span class="number">2</span>]+nums[temp]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[nums.length - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -385,7 +399,7 @@
   
   
     <a href="/2019/11/23/mysql-fin/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MySQL总结</div>
+      <div class="article-nav-title">MySQL底层索引结构分析</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -552,6 +566,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">

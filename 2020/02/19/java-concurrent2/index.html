@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/JMM.jpeg">
 <meta property="og:image" content="http://yoursite.com/img/volatile.jpeg">
-<meta property="og:updated_time" content="2020-03-21T10:26:53.535Z">
+<meta property="og:updated_time" content="2020-04-05T13:34:46.373Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发(2)">
 <meta name="twitter:description" content="多线程并发(二)">
@@ -215,6 +215,29 @@
 </ul>
 <p>所以在一定程度上，volatile保证了有序性。</p>
 <p>但是关于<strong>原子性</strong>，虽然读写操作是原子性的，但是比如val++,或者是x = x + 1这种操作并非原子操作，他们复合了读写，并不能保证其原子性。</p>
+<h1><span id="各种锁的实现与概念">各种锁的实现与概念</span></h1><h2><span id="1可重入锁">1.可重入锁</span></h2><p>可重入锁，又被称为递归锁，描述的是一种，如果外层方法已经获取到了一把锁，那么内层方法再次尝试获取这把锁的时候，就可以直接获取到，而不是陷入阻塞。</p>
+<p>常见的可重入锁比如：synchronized，ReentranLock，都符合该种锁的特征。</p>
+<p>可重入锁的实现方式一般如下：</p>
+<p>锁的状态由0~n构成，当0时表示没有线程获取到这把锁，当大于0时则有线程获取这把锁。</p>
+<p>当外层方法获取到这把锁时，将锁状态从0增长为1，代表有一层方法获取到了这把锁。</p>
+<p>当内层方法再次获取时，发现同一线程的外层方法已经获取到锁了，在同一线程内部自然不存在并发问题，所以该只需要将锁状态在加一，表明又有一层方法获取到了锁即可。</p>
+<p>当锁释放时，自然时从里层到外层依次减一，知道该线程所有获取到的锁都被释放，该锁状态重新回到0，其他线程才可以再次获取到这把锁。</p>
+<h2><span id="公平锁和非公平锁">公平锁和非公平锁</span></h2><p>synchronized关键字在jvm层面实现，而且实际上并不是公平锁，所以在Lock中又对公平锁进行了实现，比如ReentranLock就可以实现公平锁，但是ReentranLock是默认实现非公平锁的。</p>
+<p>什么是公平锁呢，公平锁就是：</p>
+<blockquote>
+<p>当一个线程尝试获取锁，如果此时锁被其他人占用，则直接进入队列。各个线程对锁的占用则是按照队列依次进行。公平锁的好处则是每个线程都不会被饿死，每个线程都会获取到锁并执行。</p>
+</blockquote>
+<p>而非公平锁则是：</p>
+<blockquote>
+<p>非公平锁则是可以被插队的。当线程尝试获取锁的时候，有两种可能：</p>
+<ol>
+<li><p>当时其他线程正在工作，根本无法获取锁，那么就加入队列。</p>
+</li>
+<li><p>当时其他线程刚好工作完成，队列还没有给下一个队列中任务分配锁，那么这时候这个尝试获取锁的线程就会插队，到队列之前先获取到锁，从而直接开始工作。</p>
+</li>
+</ol>
+</blockquote>
+<p>既然ReentranLock中有公平锁和非公平锁的实现，我们就拿出来看看是怎么实现的。</p>
 <h1><span id="线程池">线程池</span></h1><p>线程的创建和销毁是十分消耗性能的，为了降低创建和销毁线程对性能的消耗，就可以使用线程池。需要使用的时候从线程池中提取，使用结束再将其释放回线程池。重复使用线程，降低消耗。</p>
 <h2><span id="threadpoolexecutor线程池类参数解析">ThreadPoolExecutor线程池类参数解析</span></h2><table>
 <thead>
@@ -303,48 +326,7 @@
 <li>LinkedBlockQueue 是一个由链表实现的无界阻塞队列。它也提供了一个可选的有界构造函数。在未指明容量时，默认容量未Interger.MAX_VALUE.</li>
 </ol>
 <p>队列的常用操作</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>add</td>
-<td>增加一个元素；如果队列已满，则抛出一个异常</td>
-</tr>
-<tr>
-<td>remove</td>
-<td>移除并返回队列头部的元素；如果队列为空，则抛出一个异常</td>
-</tr>
-<tr>
-<td>offer</td>
-<td>添加一个元素并返回true；如果队列已满则返回false</td>
-</tr>
-<tr>
-<td>poll</td>
-<td>移除并返回队列头部的元素，如果队列为空，则返回null</td>
-</tr>
-<tr>
-<td>put</td>
-<td>添加一个元素，如果队列满，则阻塞</td>
-</tr>
-<tr>
-<td>take</td>
-<td>移除并返回队列头部的元素，如果队列为空，则阻塞</td>
-</tr>
-<tr>
-<td>element</td>
-<td>返回队列头部的元素，如果队列为空，则抛出一个异常</td>
-</tr>
-<tr>
-<td>peek</td>
-<td>返回队列头部的元素，如果队列为空，则返回null</td>
-</tr>
-</tbody>
-</table>
+<p>|方法|作用|<br>|—|—||add|增加一个元素；如果队列已满，则抛出一个异常|<br>|remove|移除并返回队列头部的元素；如果队列为空，则抛出一个异常|<br>|offer|添加一个元素并返回true；如果队列已满则返回false|<br>|poll|移除并返回队列头部的元素，如果队列为空，则返回null|<br>|put|添加一个元素，如果队列满，则阻塞|<br>|take|移除并返回队列头部的元素，如果队列为空，则阻塞|<br>|element|返回队列头部的元素，如果队列为空，则抛出一个异常|<br>|peek|返回队列头部的元素，如果队列为空，则返回null|</p>
 <p>实际上这些操作方式就是队列常用的操作在外加阻塞式实现。</p>
 <h3><span id="executors线程工厂类">Executors线程工厂类</span></h3><p>线程工厂类用于产生一个固定特性的线程池。</p>
 <h4><span id="1-executorsnewcachedthreadpool">1. Executors.newCachedThreadPool()</span></h4><p>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程.</p>
@@ -352,6 +334,13 @@
 <h4><span id="3-executorsnewsinglethreadexecutor">3. Executors.newSingleThreadExecutor()</span></h4><p>创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有的任务按照顺序执行</p>
 <h4><span id="4-executorsnewscheduledthreadpoolint">4. Executors.newScheduledThreadPool(int)</span></h4><p>创建一个支持定时周期性任务的线程池。</p>
 <h2><span id="线程池的使用案例">线程池的使用案例</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> threadId;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TaskThread</span><span class="params">(<span class="keyword">int</span> threadId)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.threadId = threadId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Task "</span>+ threadId + <span class="string">" is working"</span>);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            System.out.println(<span class="string">"Task "</span>+ threadId + <span class="string">" has finished"</span>);        </span><br><span class="line">        &#125;<span class="keyword">catch</span>(InterruptedException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="合理配置线程池">合理配置线程池</span></h2><p>关于线程池中的corePoolSize参数，需要根据不同的情况来设置比较优化的值。</p>
+<h3><span id="cpu密集型">CPU密集型</span></h3><p>CPU密集型指的是任务需要大量的运算，阻塞比较少，CPU全速运行。</p>
+<p>CPU密集型任务只有在真多核CPU上才能得到加速。</p>
+<p>CPU密集型的任务尽可能的少配置线程数。</p>
+<p>一般数量为：CPU核数+1</p>
+<h3><span id="io密集型">IO密集型</span></h3><p>IO密集型的程序常常需要阻塞来为IO开道，所有尽可能的配置多的线程数，比如：CPU核数*2</p>
+<p>或者：CPU核数/(1-阻塞系数)</p>
 <h1><span id="threadlocal">ThreadLocal</span></h1><p>ThreadLocal是一种特殊的工具，它可以在使用多线程的时候，为每一条不同的线程提供一个独立的存储空间。也就是说，使用ThreadLocal创建的变量，在多线程并发的时候并不会出现其他线程改变本线程值的情况。</p>
 <p>以下是代码实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        TestThread test1 = <span class="keyword">new</span> TestThread();</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(test1);</span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(test1);</span><br><span class="line">        Thread t3 = <span class="keyword">new</span> Thread(test1);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">        t3.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ThreadLocal&lt;Integer&gt; localVal = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;(); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> normal;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestThread</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Double d = Math.random()*<span class="number">10</span>;</span><br><span class="line">        normal = d.intValue();</span><br><span class="line">        System.out.println(d);</span><br><span class="line">        localVal.set(d.intValue());</span><br><span class="line">        System.out.println(localVal.get()+<span class="string">" "</span>+ normal);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
@@ -673,6 +662,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">

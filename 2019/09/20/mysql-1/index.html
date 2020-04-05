@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="直接切入重点，对首先对MySql的查询进行优化。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-20T14:00:19.308Z">
+<meta property="og:updated_time" content="2020-04-02T02:55:25.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能MySql（一）">
 <meta name="twitter:description" content="直接切入重点，对首先对MySql的查询进行优化。">
@@ -215,6 +215,7 @@
 </ul>
 <p>MySql的最大最小值优化没有你想象的那么美好，如果你在使用MIN(id)或者MAX(id)的同时，WHERE条件没有在id键上，那么就算是你在id上加了索引，DBMS依旧回做一次全表扫描。举一个书上的例子：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(<span class="keyword">id</span>) <span class="keyword">FROM</span> test.actor <span class="keyword">WHERE</span> first_name = <span class="string">'zi'</span></span><br><span class="line"><span class="comment">#该语句就会将整个actor表进行扫描，即使是id上有索引，但是这个查询仍然要全表扫描</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#来对这条语句进行一个优化，既然MySql的DBMS是从头到尾进行扫描，所以主键排序应该是从小到大扫描，手动对MIN(id)来优化</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> test.actor <span class="keyword">USE</span> <span class="keyword">INDEX</span>(PRIMARY)</span><br><span class="line">  <span class="keyword">WHERE</span> first_name = <span class="string">'zi'</span></span><br></pre></td></tr></table></figure>
+<p>但是再实际操作</p>
 
       
 
@@ -497,6 +498,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
