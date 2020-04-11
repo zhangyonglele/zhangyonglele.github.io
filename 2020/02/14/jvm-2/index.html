@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="此文章参考Java 虚拟机  GC篇">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-03T03:17:45.934Z">
+<meta property="og:updated_time" content="2020-04-06T12:37:14.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM解析（二）">
 <meta name="twitter:description" content="此文章参考Java 虚拟机  GC篇">
@@ -288,6 +288,9 @@
 <h2><span id="内存分配和回收策略">内存分配和回收策略</span></h2><h3><span id="minor-gc-和-full-gc">Minor GC 和 Full GC</span></h3><p><strong>Minor GC</strong>: 回收新生代，因为新生代对象存活时间很短，因此Minor GC会频繁执行，执行速度也比较快。</p>
 <p><strong>Full GC</strong>：回收老年代和新生代，老年代存活时间长，因此Full GC很少执行，而且比Minor GC 慢很多。</p>
 <h3><span id="新生代内存分析">新生代内存分析</span></h3><p>JVM将新生代分为三个部分，一个Eden区和两个survivor区(分别叫from和to)，默认比例是8：1：1。</p>
+<blockquote>
+<p>这里为什么是8:1:1。首先因为from区和to区的</p>
+</blockquote>
 <p>一般情况下，新创建的对象会被分配到Eden区，这些对象经过一次Minor GC之后，如果仍然存活，就会被移动到Survivor区。对象在Survivor区中每经过一次Minor GC，年龄就会增加1岁。当年龄增加到一定程度，就会被移入老年代。</p>
 <p>因为新生代的对象大部分都是生的快死的快，所以在新生代的垃圾回收使用的是复制算法。</p>
 <ol>
@@ -575,11 +578,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,11 +594,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,6 +607,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,10 +626,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -632,6 +635,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
               </li>
             
             <div class="clearfix"></div>

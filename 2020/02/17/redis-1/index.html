@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="Redis是一个典型的NoSQL数据库。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-29T12:02:50.770Z">
+<meta property="og:updated_time" content="2020-04-06T12:14:51.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis">
 <meta name="twitter:description" content="Redis是一个典型的NoSQL数据库。">
@@ -321,6 +321,32 @@
 <li>RDB的性能要强于AOF</li>
 <li>如果两个都使用了优先加载AOF</li>
 </ol>
+<h1><span id="redis中的过期处理">Redis中的过期处理</span></h1><p>在Redis中，使用的过期策略有三种，分别来对他们分析：</p>
+<h3><span id="1-定时删除">1. 定时删除</span></h3><p>定时删除是指，在这个key被创建的时候，为这个key设置一个定时器，让这个key在过期时间来临的时候被删除。</p>
+<p>优点是可以保证内存更快的释放。</p>
+<p>缺点是因为过期的key非常多，频繁的删除清理操作会占用很大的CPU时间，在CPU紧张的时候，就会十分低效。如果每一个key都要创建一个定时器，定时器也会十分影响性能。</p>
+<h3><span id="2-懒汉式删除">2. 懒汉式删除</span></h3><p>key过期的时候不主动删除，在每次在获取值的时候在检查是否过期了，如果过期了，就删除，同时返回null。</p>
+<p>优点是是删除操作值只发生在获取值的时候，而且只删除这一个内容，对CPU占用比较少。</p>
+<p>缺点是太多的key过期之后有可能很久都没有获取过，占用大量的内存。</p>
+<h3><span id="3-定期删除">3. 定期删除</span></h3><p>每过一段时间，就检查一次有没有过期的内容，如果有，就删除。</p>
+<p>优点是定时删除的优化，不用占用那么多cpu。</p>
+<p>缺点是没有特色，太过均衡。</p>
+<p>这种方式的关键在于设置执行频率和每次需要执行多久。只有比较好的设置了之后才能利用好该种的优点。</p>
+<h3><span id="redis中采用的删除策略">Redis中采用的删除策略</span></h3><p>采用的是懒汉式删除和定期删除。</p>
+<p>懒汉式删除流程：</p>
+<ol>
+<li>在进行get或setnx等操作时，先检查key是否过期。</li>
+<li>如果过期，则删除key。</li>
+<li>如果没过期，直接执行操作即可。</li>
+</ol>
+<p>定期删除流程：</p>
+<ol>
+<li>遍历整个数据库。</li>
+<li>检查当前库中的指定个数的key（默认为20个key）</li>
+<li>如果当前库中没有任何一个设置了过期时间的key，则执行下一个库的遍历。</li>
+<li>随机获取一个设置了过期时间的key，则检查该key是否过期，如果过期，则删除。</li>
+<li>判断定期删除是否达到指定时长，如果到达，则推出定期删除。</li>
+</ol>
 <h1><span id="redis的架构模式">Redis的架构模式</span></h1><h2><span id="单机架构模式">单机架构模式</span></h2><p>单个redis服务器，多个客户端访问。</p>
 <p>特点，简单。</p>
 <p>问题：</p>
@@ -570,11 +596,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,11 +612,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,6 +625,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,10 +644,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -627,6 +653,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
               </li>
             
             <div class="clearfix"></div>

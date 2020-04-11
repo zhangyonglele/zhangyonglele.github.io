@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="最近正好学到操作系统的线程和进程相关，学了PCB和TCB，正好数据库中也有相关知识，那就正好写一点数据库并发控制的东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-18T09:49:30.964Z">
+<meta property="og:updated_time" content="2020-04-05T16:00:56.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="乐观锁和悲观锁">
 <meta name="twitter:description" content="最近正好学到操作系统的线程和进程相关，学了PCB和TCB，正好数据库中也有相关知识，那就正好写一点数据库并发控制的东西。">
@@ -186,7 +186,11 @@
 <p>不可重复是T1在读取数据后，T2执行更新操作，T1无法读到开始时读取的数据。</p>
 <p><strong>3.脏读</strong></p>
 <p>事务T1将某一值修改，然后事务T2读取该值，此后T1因为某种原因撤销对该值的修改，这就导致了T2所读取到的数据是无效的。</p>
+<p><strong>3.幻读</strong></p>
+<p>幻读实际上描述的是事务在插入已经检查过不存在的记录时，惊奇的发现这些数据已经存在了，之前的检测获取到的数据如同鬼影一般。</p>
 <p>这里不具体讲这三种的具体情况和实例，在数据库操作时，我们常用不同的隔离等级来创建符合业务操作的表。封锁粒度影响了数据库库的并发性能。</p>
+<h4><span id="隔离级别">隔离级别</span></h4><p>read uncommitted，read committed ， repeatable read，serializable。</p>
+<p>四种分别对应解决丢失修改，不可重复读，脏读，幻读。</p>
 <h3><span id="悲观锁和乐观锁">悲观锁和乐观锁</span></h3><p>为了控制并发，人们在业务逻辑的基础上建立起了两种理论逻辑，在这个理论逻辑上提出了悲观锁和乐观锁。锁机制的实现并非只在数据库中存在，在其他的程序设计（线程、进程中）同样存在。</p>
 <p><strong>悲观锁</strong></p>
 <p>悲观锁是认为基本上所有数据都有可能被并发访问，为了防止并发出错，我们提供S锁(共享锁)和X锁(排他锁)。使用锁机制，让数据在被操作时被隔离起来，从而避免并发出错。</p>
@@ -450,11 +454,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -466,11 +470,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,6 +483,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,10 +502,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -507,6 +511,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
               </li>
             
             <div class="clearfix"></div>

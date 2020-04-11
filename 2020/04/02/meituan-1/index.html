@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="究极猛男，今天美团一面究极刺激，普通知识一大堆，问到的盲区也不少，做个整理。 然后就是尼玛的迭代先序二叉树！！！！！！尼玛的脑子抽了！！！！！！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-02T08:16:21.949Z">
+<meta property="og:updated_time" content="2020-04-06T03:29:42.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="美团一面面经">
 <meta name="twitter:description" content="究极猛男，今天美团一面究极刺激，普通知识一大堆，问到的盲区也不少，做个整理。 然后就是尼玛的迭代先序二叉树！！！！！！尼玛的脑子抽了！！！！！！">
@@ -226,7 +226,7 @@
 <li><p>手撕二叉树迭代先序遍历</p>
 </li>
 </ol>
-<p>我再不会写我是dog。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preTranver</span><span class="params">(Node root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(stack.size() &gt; <span class="number">0</span> || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">        System.out.print(tree.val + <span class="string">" "</span>);</span><br><span class="line">        <span class="keyword">if</span>(tree != <span class="keyword">null</span>)&#123;</span><br><span class="line">            stack.push(tree);</span><br><span class="line">            tree = tree.left;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            tree = stack.pop();</span><br><span class="line">            tree = tree.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我再不会写我是dog。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preTranver</span><span class="params">(Node tree)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(stack.size() &gt; <span class="number">0</span> || tree != <span class="keyword">null</span>)&#123;</span><br><span class="line">        System.out.print(tree.val + <span class="string">" "</span>);</span><br><span class="line">        <span class="keyword">if</span>(tree != <span class="keyword">null</span>)&#123;</span><br><span class="line">            stack.push(tree);</span><br><span class="line">            tree = tree.left;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            tree = stack.pop();</span><br><span class="line">            tree = tree.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -330,6 +330,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/04/10/springcloud-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SpringCloud微服务框架(2) Feign
+        
+      </div>
+    </a>
   
   
     <a href="/2020/03/29/my-mvc-framework-3/" id="article-nav-older" class="article-nav-link-wrap">
@@ -459,11 +468,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,11 +484,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,6 +497,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,10 +516,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -516,6 +525,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
               </li>
             
             <div class="clearfix"></div>
