@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="断路器的功能是当服务集群与Feign客户端意外断开连接后，外界的服务依旧可能通过Feign试图访问异常服务。Hystrix断路器的功能就是当异常服务断开连接时间达到阈值，则主动将该服务与Feign客户端断开，并且返回指定的fall back响应。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-11T05:50:16.123Z">
+<meta property="og:updated_time" content="2020-06-15T18:38:12.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringCloud微服务框架(3) Hystrix断路器（基于Feign的实现）">
 <meta name="twitter:description" content="断路器的功能是当服务集群与Feign客户端意外断开连接后，外界的服务依旧可能通过Feign试图访问异常服务。Hystrix断路器的功能就是当异常服务断开连接时间达到阈值，则主动将该服务与Feign客户端断开，并且返回指定的fall back响应。">
@@ -176,7 +176,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>断路器的功能是当服务集群与Feign客户端意外断开连接后，外界的服务依旧可能通过Feign试图访问异常服务。Hystrix断路器的功能就是当异常服务断开连接时间达到阈值，则主动将该服务与Feign客户端断开，并且返回指定的fall back响应。<br><a id="more"></a></p>
-<h1><span id="基于feign的断路器实现">基于Feign的断路器实现</span></h1><p>Feign是自带断路器的，在D版本的Spring Cloud中，它没有默认打开。需要在配置文件中配置打开它。</p>
+<h2><span id="基于feign的断路器实现">基于Feign的断路器实现</span></h2><p>Feign是自带断路器的，在D版本的Spring Cloud中，它没有默认打开。需要在配置文件中配置打开它。</p>
 <p>在application.yml文件中加入<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="comment">#启动熔断器</span></span><br><span class="line">  <span class="attr">hystrix:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
 <p>按照前面文章编写yml文件的读者可以注意文件中是否已经打开。</p>
 <p>在Client接口中指定fallback</p>
@@ -287,6 +287,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/05/10/springcloud-4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SpringCloud微服务框架(4) Zuul路由转发和过滤器
+        
+      </div>
+    </a>
   
   
     <a href="/2020/04/10/springcloud-2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -416,10 +425,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -428,7 +433,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -436,7 +445,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +453,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">https network</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,11 +465,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -477,6 +490,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">springcloud</a>
               </li>
             
             <div class="clearfix"></div>

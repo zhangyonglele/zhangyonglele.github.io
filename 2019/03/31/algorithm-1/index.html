@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>算法笔记（一） | YLZhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;emsp;从大二开始突然感觉到算法的重要性，开始算法练习，经过近一年百题的练习，如今写一点东西出来，给自己做个笔记，无论是考研还是工作，这份经历都十分的重要。（大概又是给自己开了一个填不起的坑） &amp;emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。">
+  <meta name="description" content="&amp;emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记（一）">
 <meta property="og:url" content="http://yoursite.com/2019/03/31/algorithm-1/index.html">
 <meta property="og:site_name" content="YLZhang&#39;s blog">
-<meta property="og:description" content="&amp;emsp;从大二开始突然感觉到算法的重要性，开始算法练习，经过近一年百题的练习，如今写一点东西出来，给自己做个笔记，无论是考研还是工作，这份经历都十分的重要。（大概又是给自己开了一个填不起的坑） &amp;emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。">
+<meta property="og:description" content="&amp;emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-03T05:58:25.365Z">
+<meta property="og:updated_time" content="2020-04-27T12:48:07.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法笔记（一）">
-<meta name="twitter:description" content="&amp;emsp;从大二开始突然感觉到算法的重要性，开始算法练习，经过近一年百题的练习，如今写一点东西出来，给自己做个笔记，无论是考研还是工作，这份经历都十分的重要。（大概又是给自己开了一个填不起的坑） &amp;emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。">
+<meta name="twitter:description" content="&amp;emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。">
   
     <link rel="alternative" href="/atom.xml" title="YLZhang&#39;s blog" type="application/atom+xml">
   
@@ -175,8 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&emsp;从大二开始突然感觉到算法的重要性，开始算法练习，经过近一年百题的练习，如今写一点东西出来，给自己做个笔记，无论是考研还是工作，这份经历都十分的重要。（大概又是给自己开了一个填不起的坑）</p>
-<p>&emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。</p>
+        <p>&emsp;我想把想要整理的算法分成数学算法，数据结构算法，排序算法，检索算法，和动态规划。贪心思想独划一类进行整理分析。</p>
 <hr>
 <a id="more"></a>
 <h4><span id="算法分类依据">算法分类依据</span></h4><p>&emsp;首先称述一下分类的依据，在我现有知识水平认知下，数学算法通常是为了解决一类或者一种数学公式求解或者解决一部分数值计算问题，比如说<strong>解方程组，插值积分</strong>这一类的问题，<strong>素数判断，公因数等数学问题</strong>都被我划入这一类，从根本上来说，数学算法的根本就是将数学问题使用数学公式或者一类自然语言描述，在使用代码逻辑编写按顺序的计算方法，人类思维和计算机执行顺序不同，要将自然语言和数学思维转化成为算法代码的难度在很多问题中很高。数学算法的核心就是在于将数学公式抽象成为可以使用代码表达的表达式，进行有限次的运算求解，数学算法的成功与否同样在于算法复杂度，越低复杂度的算法越成功。</p>
@@ -198,8 +197,23 @@
 <p><table><br>  <th></th><br>  <th>分析</th><br>  <th>优点</th><br>  <th>缺点</th><br>  <tr><br>    <th>递归</th><br>    <td>通过函数自身调用自身而得到结果，要求最后函数结果收敛，调用时注意函数结果边界，不可出现无限调用的情况，函数结果发散则不可使用递归法。</td><br>    <td>1）代码量少，代码十分优雅，可读性极强。<br>2）无限集合也可使用递归的方式来获得收敛函数的结果，得到符合边界值的结果。</td><br>    <td>函数栈占用内存极大，在空间复杂度上不占任何优势，在OJ平台上极容易空间超限，在现实中极容易造成堆栈溢出。</td><br>  </tr><br>  <tr><br>    <th>迭代</th><br>    <td>迭代通过控制循环条件来使用，在同一函数中反复调用语句，常用计数器控制循环边界。</td><br>    <td>占用空间少，代码执行效率相比递归较高。</td><br>    <td>1）迭代代码繁杂，在大体量上程序阅读难度较大。<br>2）思维难度较大，常常需要手动调用栈结构来实现迭代方法，对于程序员来说提升了写代码的难度。</td><br>  </tr><br>  <tr><br>    <th>总结</th><br>    <td colspan="3">迭代和递归一般可以通过程序员的思维整合相互转化，从根本上来说应该都是循环的一种方式。</td><br>  </tr><br></table><br>&emsp;然后来使用代码实例来简单看一下这两种方法，我在这里使用树的前序遍历的递归和迭代方法来举例。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*树节点对象封装</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val;</span><br><span class="line"></span><br><span class="line">  TreeNode left;</span><br><span class="line"></span><br><span class="line">  TreeNode right;</span><br><span class="line"></span><br><span class="line">  TreeNode(<span class="keyword">int</span> data)&#123;<span class="keyword">this</span>.val = data;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Traverse</span></span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *先序遍历入口函数，递归入口</span></span><br><span class="line"><span class="comment">  *<span class="doctag">@param</span> root 树根节点</span></span><br><span class="line"><span class="comment">  *<span class="doctag">@return</span> 返回先序遍历结果集</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal_Recursion</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList() ;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        add(res,root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *先序遍历递归函数</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(List temp,TreeNode root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">        temp.add(root.val);</span><br><span class="line">        add(temp,root.left);</span><br><span class="line">        add(temp,root.right);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *借助栈来实现迭代式树的先序遍历</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preTraversal_Iteration</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; temp = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        TreeNode node = stack.pop();</span><br><span class="line">        temp.add(node.val);</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h4><span id="emsp3-分治思想">&emsp;3、分治思想</span></h4><p>&emsp;分治分治，分而治之，分治思想常用于将一个大问题分割成为规模较小的子问题，且各个子问题和原问题的性质相同，求出子问题的解，原问题自然也就有了答案</p>
-
+<h4><span id="emsp3-分治思想">&emsp;3、分治思想</span></h4><p>&emsp;分治分治，分而治之，分治思想常用于将一个大问题分割成为规模较小的子问题，且各个子问题和原问题的性质相同，求出子问题的解，原问题自然也就有了答案。</p>
+<p>&emsp;经典的分治算法比如归并排序或者快排都是经典的分而治之。对于分治法而言，最重要的就是保证大问题分解出的子问题都是相同的，只不过是规模不同。</p>
+<p>&emsp;比如在下述的归并排序中，就可以看到递归解决大问题，分解为小问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 归并排序入口</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> number</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] number)</span></span>&#123;</span><br><span class="line">    mergeSort(number, <span class="number">0</span>, number.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] number,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; right)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//将数组分为两部分，对左右两部分进行递归划分</span></span><br><span class="line">        mergeSort(number, left, mid);</span><br><span class="line">        mergeSort(number, mid + <span class="number">1</span>, right);</span><br><span class="line">        <span class="comment">//将两部分数组合并</span></span><br><span class="line">        merge(number, left, mid, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//把一个数组分为两部分，并对其进行有序化合并</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] number,<span class="keyword">int</span> left,<span class="keyword">int</span> mid,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[number.length];</span><br><span class="line">    <span class="keyword">int</span> p1 = left;</span><br><span class="line">    <span class="keyword">int</span> p2 = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> p = left;</span><br><span class="line">    <span class="comment">//当两个数组都不为空时，将结果将小的元素添加到结果数组内</span></span><br><span class="line">    <span class="keyword">while</span>(p1 &lt;= mid &amp;&amp; p2 &lt;= right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(number[p1] &lt;= number[p2])&#123;</span><br><span class="line">            temp[p] = number[p1];</span><br><span class="line">            p1++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            temp[p] = number[p2];</span><br><span class="line">            p2++;</span><br><span class="line">        &#125;</span><br><span class="line">        p++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果1号数组仍有元素，则直接放入结果数组</span></span><br><span class="line">    <span class="keyword">while</span>(p1 &lt;= mid)&#123;</span><br><span class="line">        temp[p] = number[p1];</span><br><span class="line">        p++;</span><br><span class="line">        p1++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果2号数组仍有元素，则直接放入结果数组</span></span><br><span class="line">    <span class="keyword">while</span>(p2 &lt;= right)&#123;</span><br><span class="line">        temp[p] = number[p2];</span><br><span class="line">        p++;</span><br><span class="line">        p2++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将结果数组内容回填</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> low = left;low &lt;= right;low++)&#123;</span><br><span class="line">        number[low] = temp[low];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="动态规划">动态规划</span></h4><p>动态规划的最大的特色是后一个状态和前一个状态相关，用于求解最大路径，最小和，最大和，最大长度的问题比较常用。</p>
+<p>该种问题最常用的方式是推导出状态转移方程，只要将合理的状态转移方程编写出来，就可以解决大部分的问题。在写状态转移方程的时候要注意边界值的范围，通过确定合理边界值的范围就可以递推出动态数组的全部内容。</p>
+<p>同样在此种问题中，并不是都需要使用O(N)的额外空间的，在有些优化问题中，可以抛弃掉前面已经不需要的状态，就可以在常数空间内解决动态规划问题，从而提高算法的空间利用效率。</p>
+<p>还是举一个常用实例说明动态规划的解法。</p>
+<h4><span id="打家劫舍leetcode198">打家劫舍,leetcode.198</span></h4><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
+<h5><span id="解题思路">解题思路</span></h5><p>这道题的解题思路其实比较简单，动态规划即可。</p>
+<p>设dp[n]为在第n个房子处能偷到的最大的钱数，那么就有两种可能行，偷上家，和不偷上家。偷上家，那么这家就不能偷；不偷商家，那这家就能偷。这两种情况那种偷的多，就选择哪种。</p>
+<p>首先边界条件，如果只有一个房子，那么dp[0] = nums[0];</p>
+<p>如果有两个房子，那么dp[1] = Max(nums[0],nums[1]);</p>
+<p>当n&gt;2时：</p>
+<p>dp[n] = max(dp[n-1],dp[n-2] + nums[n]),即选择要不要偷上家。</p>
+<h5><span id="代码实现">代码实现</span></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length &lt; <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    dp[<span class="number">1</span>] = nums[<span class="number">1</span>] &gt; nums[<span class="number">0</span>]?nums[<span class="number">1</span>]:nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> temp = <span class="number">2</span>;temp &lt; nums.length;temp++)&#123;</span><br><span class="line">        dp[temp] = Math.max(dp[temp - <span class="number">1</span>],dp[temp - <span class="number">2</span>]+nums[temp]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[nums.length - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -440,10 +454,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -452,7 +462,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -460,7 +474,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,11 +482,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">https network</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,11 +494,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,6 +519,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">springcloud</a>
               </li>
             
             <div class="clearfix"></div>

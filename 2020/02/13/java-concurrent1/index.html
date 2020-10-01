@@ -17,7 +17,7 @@
 <meta property="og:description" content="线程、进程与多线程的创建">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/thread.jfif">
-<meta property="og:updated_time" content="2020-03-03T07:44:02.421Z">
+<meta property="og:updated_time" content="2020-07-10T06:21:21.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发(1)">
 <meta name="twitter:description" content="线程、进程与多线程的创建">
@@ -266,7 +266,8 @@
 <p>Thread.holdsLock(obj)方法可用于检测是否拥有一把锁，参数为那把锁的名字。</p>
 </blockquote>
 <h3><span id="使用lock">使用lock</span></h3><p>还有一种方式是使用ReentrantLock类提供的lock()和unlock()方法来划分临界区，它的优点是比较灵活，自由控制粒度。缺点是需要手动释放锁。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">private</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"try to enter the code block"</span>);</span><br><span class="line">       lock.lock();</span><br><span class="line">           System.out.println(<span class="string">"test begins"</span>);</span><br><span class="line">           shortSleep();</span><br><span class="line">           System.out.println(<span class="string">"test ends"</span>);</span><br><span class="line">       lock.unlock();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3><span id="使用lock和synchronized的区别">使用lock和synchronized的区别</span></h3><ol>
+<h3><span id="volatile">volatile</span></h3><p>在接下来的部分提到</p>
+<h3><span id="threadlocal">threadlocal</span></h3><h3><span id="阻塞队列">阻塞队列</span></h3><h3><span id="原子变量">原子变量</span></h3><h3><span id="使用lock和synchronized的区别">使用lock和synchronized的区别</span></h3><ol>
 <li>lock实际上时java的一个类，而synchronized是java的内置关键字，是在jvm层面实现的。</li>
 <li>synchronized无法判断是否获取锁，而lock可以判断是否获取到锁</li>
 <li>synchronized自动释放锁，而lock需要手动释放</li>
@@ -514,10 +515,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -526,7 +523,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,7 +535,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,11 +543,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">https network</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +555,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +580,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">springcloud</a>
               </li>
             
             <div class="clearfix"></div>

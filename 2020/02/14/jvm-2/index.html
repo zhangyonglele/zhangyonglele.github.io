@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="YLZhang&#39;s blog">
 <meta property="og:description" content="此文章参考Java 虚拟机  GC篇">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-06T12:37:14.262Z">
+<meta property="og:updated_time" content="2020-04-13T06:07:27.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM解析（二）">
 <meta name="twitter:description" content="此文章参考Java 虚拟机  GC篇">
@@ -289,7 +289,7 @@
 <p><strong>Full GC</strong>：回收老年代和新生代，老年代存活时间长，因此Full GC很少执行，而且比Minor GC 慢很多。</p>
 <h3><span id="新生代内存分析">新生代内存分析</span></h3><p>JVM将新生代分为三个部分，一个Eden区和两个survivor区(分别叫from和to)，默认比例是8：1：1。</p>
 <blockquote>
-<p>这里为什么是8:1:1。首先因为from区和to区的</p>
+<p>这里为什么是8:1:1。首先因为from区和to区的大小相同，如果重新设置也必须设置成相同的形式，而eden区是8，因为有统计和经验表明，大多数的对象都是朝生夕死，很少有能存活非常久的对象。</p>
 </blockquote>
 <p>一般情况下，新创建的对象会被分配到Eden区，这些对象经过一次Minor GC之后，如果仍然存活，就会被移动到Survivor区。对象在Survivor区中每经过一次Minor GC，年龄就会增加1岁。当年龄增加到一定程度，就会被移入老年代。</p>
 <p>因为新生代的对象大部分都是生的快死的快，所以在新生代的垃圾回收使用的是复制算法。</p>
@@ -578,10 +578,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -590,7 +586,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,7 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">network</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +606,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">https network</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面经</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,11 +618,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
+                <a href="javascript:void(0)" class="js-tag color3">面经</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">框架与设计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,6 +643,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">springcloud</a>
               </li>
             
             <div class="clearfix"></div>
