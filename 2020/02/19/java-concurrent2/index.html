@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/JMM.jpeg">
 <meta property="og:image" content="http://yoursite.com/img/volatile.jpeg">
-<meta property="og:updated_time" content="2020-04-05T14:27:44.844Z">
+<meta property="og:updated_time" content="2020-10-01T16:19:51.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发(2)">
 <meta name="twitter:description" content="多线程并发(二)">
@@ -331,7 +331,48 @@
 <li>LinkedBlockQueue 是一个由链表实现的无界阻塞队列。它也提供了一个可选的有界构造函数。在未指明容量时，默认容量未Interger.MAX_VALUE.</li>
 </ol>
 <p>队列的常用操作</p>
-<p>|方法|作用|<br>|—|—||add|增加一个元素；如果队列已满，则抛出一个异常|<br>|remove|移除并返回队列头部的元素；如果队列为空，则抛出一个异常|<br>|offer|添加一个元素并返回true；如果队列已满则返回false|<br>|poll|移除并返回队列头部的元素，如果队列为空，则返回null|<br>|put|添加一个元素，如果队列满，则阻塞|<br>|take|移除并返回队列头部的元素，如果队列为空，则阻塞|<br>|element|返回队列头部的元素，如果队列为空，则抛出一个异常|<br>|peek|返回队列头部的元素，如果队列为空，则返回null|</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add</td>
+<td>增加一个元素；如果队列已满，则抛出一个异常</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>移除并返回队列头部的元素；如果队列为空，则抛出一个异常</td>
+</tr>
+<tr>
+<td>offer</td>
+<td>添加一个元素并返回true；如果队列已满则返回false</td>
+</tr>
+<tr>
+<td>poll</td>
+<td>移除并返回队列头部的元素，如果队列为空，则返回null</td>
+</tr>
+<tr>
+<td>put</td>
+<td>添加一个元素，如果队列满，则阻塞</td>
+</tr>
+<tr>
+<td>take</td>
+<td>移除并返回队列头部的元素，如果队列为空，则阻塞</td>
+</tr>
+<tr>
+<td>element</td>
+<td>返回队列头部的元素，如果队列为空，则抛出一个异常</td>
+</tr>
+<tr>
+<td>peek</td>
+<td>返回队列头部的元素，如果队列为空，则返回null</td>
+</tr>
+</tbody>
+</table>
 <p>实际上这些操作方式就是队列常用的操作在外加阻塞式实现。</p>
 <h3><span id="executors线程工厂类">Executors线程工厂类</span></h3><p>线程工厂类用于产生一个固定特性的线程池。</p>
 <h4><span id="1-executorsnewcachedthreadpool">1. Executors.newCachedThreadPool()</span></h4><p>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程.</p>

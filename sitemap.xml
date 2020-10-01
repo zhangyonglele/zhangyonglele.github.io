@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/02/19/java-concurrent2/</loc>
+    
+    <lastmod>2020-10-01T16:19:51.355Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/09/02/nginx/</loc>
     
     <lastmod>2020-10-01T16:13:03.289Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>http://yoursite.com/2019/10/17/mysql-3/</loc>
     
     <lastmod>2020-04-05T16:00:56.380Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/02/19/java-concurrent2/</loc>
-    
-    <lastmod>2020-04-05T14:27:44.844Z</lastmod>
     
   </url>
   
