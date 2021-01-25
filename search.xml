@@ -4,6 +4,57 @@
   
     
     <entry>
+      <title>prime-for-rsa</title>
+      <link href="/2020/12/17/prime-for-rsa/"/>
+      <url>/2020/12/17/prime-for-rsa/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java中Cipher加密模块的使用方法分析</title>
+      <link href="/2020/12/13/java-cipher/"/>
+      <url>/2020/12/13/java-cipher/</url>
+      
+        <content type="html"><![CDATA[<p>有关于Java中加密算法的应用有很多，比如AES、md5，RSA等，大多数密码使用需要Cipher来进行辅助。</p><a id="more"></a><h3><span id="初始化cipher的参数内涵和基本原理">初始化Cipher的参数内涵和基本原理</span></h3><p>在使用Cihper对其进行初始化的时候，在调用以下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cipher.getInstance(String transformation);</span><br></pre></td></tr></table></figure></p><p>对于其中字符串参数 <em>transformation</em> （即转换模式）进行分析，其作用实际上是两种。</p><p>查阅一下文档（基于JDK11）：</p><blockquote><p><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/javax/crypto/Cipher.html" target="_blank" rel="noopener">sun基于JDK11的Cipher官方文档</a></p></blockquote><p>在描述中，我们可以发现对该参数的描述如下：</p><blockquote><p>A transformation is a string that describes the operation (or set of operations) to be performed on the given input, to produce some output. A transformation always includes the name of a cryptographic algorithm (e.g., AES), and may be followed by a feedback mode and padding scheme.</p><p>A transformation is of the form:</p><ul><li><p><em>“algorithm/mode/padding”</em> or</p></li><li><p><em>“algorithm”</em></p></li></ul><p>(in the latter case, provider-specific default values for the mode and padding scheme are used). For example, the following is a valid transformation:</p><pre><code>Cipher c = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);</code></pre></blockquote><p>在文章中看到该参数具有两种使用方法，一种是传统的直接将算法名称输入到Cipher初始化方法中，是最简单的，还有另一种是 <em>算法/工作模式/填充模式</em> 的较为完整的参数传递。</p><h4><span id="算法">算法</span></h4><p>算法就是我们常说的 AES, RSA等算法，不在此处详细描述。</p><h4><span id="工作模式">工作模式</span></h4><p>工作模式指的是在分组密码的实践中，将密码划分为长度为n的组。</p><h4><span id="填充模式">填充模式</span></h4><p>padding一般是指在原文长度当大于一个块的长度时，使用某种填充方式将空闲下来的长度（即不满一块的部分）使用某种规则填充</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Java Cipher </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Webflux初窥</title>
+      <link href="/2020/10/27/webflux/"/>
+      <url>/2020/10/27/webflux/</url>
+      
+        <content type="html"><![CDATA[<p>在初探Webflux之前，要先理解什么是Webflux技术。</p><h3><span id="servlet运行模式">Servlet运行模式</span></h3><p>在Webflux技术出现之前，服务器的响应模式是由Servlet+容器（如Tomcat）组成的，服务器响应模式是同步阻塞的。在Spring的框架下重新组建的servlet规范依旧是同步阻塞的模式，他们运行在在servlet容器中。</p><p>这种Servlet的运行模式是基于大型线程池+新建线程的模式。当请求进入后，为了防止线程阻塞，容器将会采用新建线程的方式来处理请求。</p><p>除去Servlet，与其一同使用的filter同样是同步阻塞的，包括用于处理的HttpServletReq和respon。</p><h3><span id="响应式的运行模式">响应式的运行模式</span></h3><p>Tomcat作为服务器运行模式一来较为重量级，而来每一个请求都会创建新的线程处理的方式对于超高并发大业务会对内存压力较重。除去这种可能出现的问题外，在微服务领域，分布式io可能会出现等待其他服务组件的情况。为了解决这个问题，首先要解决的就是同步阻塞。而对于响应式，则是对非阻塞模式的进一步诠释，当操作完成后，使用通知事件的方式。</p><p>响应式和异步常在前端和客户端中出现，对于客户端中的经典异步响应框架如Rxjava和retrofit组件连用。而在服务器领域，使用的更多的则是Reactor，本身Reactor又与JDK提供的NIO相关，本文就不过多赘述。在Flux中则采用的Reactor，当然Rxjava也是支持的。</p><p>在响应式模式中，提供了一个与CPU核心数相同的线程池来处理请求，由于处理请求的线程不存在阻塞的问题。结合Java1.8中提供的流式编程操作符，来支撑函数式编程的方面。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> webflux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>nginx轻量级Http服务器详解</title>
       <link href="/2020/09/02/nginx/"/>
       <url>/2020/09/02/nginx/</url>
