@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Webflux初窥 | YLZhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在初探Webflux之前，要先理解什么是Webflux技术。 Servlet运行模式在Webflux技术出现之前，服务器的响应模式是由Servlet+容器（如Tomcat）组成的，服务器响应模式是同步阻塞的。在Spring的框架下重新组建的servlet规范依旧是同步阻塞的模式，他们运行在在servlet容器中。 这种Servlet的运行模式是基于大型线程池+新建线程的模式。当请求进入后，为了防止">
+  <meta name="description" content="在初探Webflux之前，要先理解什么是Webflux技术。">
 <meta name="keywords" content="webflux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webflux初窥">
 <meta property="og:url" content="http://yoursite.com/2020/10/27/webflux/index.html">
 <meta property="og:site_name" content="YLZhang&#39;s blog">
-<meta property="og:description" content="在初探Webflux之前，要先理解什么是Webflux技术。 Servlet运行模式在Webflux技术出现之前，服务器的响应模式是由Servlet+容器（如Tomcat）组成的，服务器响应模式是同步阻塞的。在Spring的框架下重新组建的servlet规范依旧是同步阻塞的模式，他们运行在在servlet容器中。 这种Servlet的运行模式是基于大型线程池+新建线程的模式。当请求进入后，为了防止">
+<meta property="og:description" content="在初探Webflux之前，要先理解什么是Webflux技术。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-27T14:08:21.671Z">
+<meta property="og:updated_time" content="2021-05-15T10:40:26.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webflux初窥">
-<meta name="twitter:description" content="在初探Webflux之前，要先理解什么是Webflux技术。 Servlet运行模式在Webflux技术出现之前，服务器的响应模式是由Servlet+容器（如Tomcat）组成的，服务器响应模式是同步阻塞的。在Spring的框架下重新组建的servlet规范依旧是同步阻塞的模式，他们运行在在servlet容器中。 这种Servlet的运行模式是基于大型线程池+新建线程的模式。当请求进入后，为了防止">
+<meta name="twitter:description" content="在初探Webflux之前，要先理解什么是Webflux技术。">
   
     <link rel="alternative" href="/atom.xml" title="YLZhang&#39;s blog" type="application/atom+xml">
   
@@ -171,7 +171,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在初探Webflux之前，要先理解什么是Webflux技术。</p>
+        <p>在初探Webflux之前，要先理解什么是Webflux技术。<br><a id="more"></a></p>
 <h3><span id="servlet运行模式">Servlet运行模式</span></h3><p>在Webflux技术出现之前，服务器的响应模式是由Servlet+容器（如Tomcat）组成的，服务器响应模式是同步阻塞的。在Spring的框架下重新组建的servlet规范依旧是同步阻塞的模式，他们运行在在servlet容器中。</p>
 <p>这种Servlet的运行模式是基于大型线程池+新建线程的模式。当请求进入后，为了防止线程阻塞，容器将会采用新建线程的方式来处理请求。</p>
 <p>除去Servlet，与其一同使用的filter同样是同步阻塞的，包括用于处理的HttpServletReq和respon。</p>
@@ -423,11 +423,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -443,19 +443,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">https network</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java Cipher</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">https network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java Cipher</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,6 +479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">SpringCloud</a>
               </li>
              
@@ -488,10 +492,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
               </li>
              
               <li class="article-tag-list-item">

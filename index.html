@@ -148,26 +148,29 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-prime-for-rsa" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-2021-5-14-dairy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/17/prime-for-rsa/">prime-for-rsa</a>
+      <a class="article-title" href="/2021/05/11/2021-5-14-dairy/">献给生活</a>
     </h1>
   
 
         
-        <a href="/2020/12/17/prime-for-rsa/" class="archive-article-date">
-  	<time datetime="2020-12-17T08:43:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-17</time>
+        <a href="/2021/05/11/2021-5-14-dairy/" class="archive-article-date">
+  	<time datetime="2021-05-11T01:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
+        <p>&#8195;随着最后一片春天的落花，大学四年走向了末尾。<br>
+        
+          <a class="article-more-a" href="/2021/05/11/2021-5-14-dairy/#more">more >></a>
         
       
 
@@ -176,11 +179,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/17/prime-for-rsa/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/05/11/2021-5-14-dairy/">展开全文 >></a>
         </p>
       
 
@@ -306,14 +320,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在初探Webflux之前，要先理解什么是Webflux技术。</p>
-<h3><span id="servlet运行模式">Servlet运行模式</span></h3><p>在Webflux技术出现之前，服务器的响应模式是由Servlet+容器（如Tomcat）组成的，服务器响应模式是同步阻塞的。在Spring的框架下重新组建的servlet规范依旧是同步阻塞的模式，他们运行在在servlet容器中。</p>
-<p>这种Servlet的运行模式是基于大型线程池+新建线程的模式。当请求进入后，为了防止线程阻塞，容器将会采用新建线程的方式来处理请求。</p>
-<p>除去Servlet，与其一同使用的filter同样是同步阻塞的，包括用于处理的HttpServletReq和respon。</p>
-<h3><span id="响应式的运行模式">响应式的运行模式</span></h3><p>Tomcat作为服务器运行模式一来较为重量级，而来每一个请求都会创建新的线程处理的方式对于超高并发大业务会对内存压力较重。除去这种可能出现的问题外，在微服务领域，分布式io可能会出现等待其他服务组件的情况。为了解决这个问题，首先要解决的就是同步阻塞。而对于响应式，则是对非阻塞模式的进一步诠释，当操作完成后，使用通知事件的方式。</p>
-<p>响应式和异步常在前端和客户端中出现，对于客户端中的经典异步响应框架如Rxjava和retrofit组件连用。而在服务器领域，使用的更多的则是Reactor，本身Reactor又与JDK提供的NIO相关，本文就不过多赘述。在Flux中则采用的Reactor，当然Rxjava也是支持的。</p>
-<p>在响应式模式中，提供了一个与CPU核心数相同的线程池来处理请求，由于处理请求的线程不存在阻塞的问题。结合Java1.8中提供的流式编程操作符，来支撑函数式编程的方面。</p>
-
+        <p>在初探Webflux之前，要先理解什么是Webflux技术。<br>
+        
+          <a class="article-more-a" href="/2020/10/27/webflux/#more">more >></a>
+        
       
 
       
@@ -451,130 +461,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在分析https之前，首先要把http搞清楚。</p>
-<p>http本身基于tcp，实际上提供可靠传输的任何一种协议都可以作为http协议的底层传输。</p>
-<h2><span id="http工作原理">Http工作原理</span></h2><p>对于Http协议的，采用了请求/响应模型，客户端向服务端发送一个请求报文，内涵报文的结构的多种数据。服务器收到后将数据响应，返回给客户端，响应报文内容包括协议版本号，成功/错误代码，服务器的部分信息和报文头和响应数据。</p>
-<p>接下来简述http请求/响应的过程：</p>
-<ol>
-<li>客户端和服务器建立连接<ul>
-<li>一个客户端，和Http端口建立一个TCP连接</li>
-</ul>
-</li>
-<li>发送Http请求<ul>
-<li>通过TCP套接字，客户端向服务端发送请求报文，请求报文由请求行、请求头、空行和请求数据组成。</li>
-</ul>
-</li>
-<li>服务器接收响应并返回Http响应数据<ul>
-<li>服务器解析请求，定位请求资源，服务器将响应数据副本写入TCP套接字。一个响应由状态行、响应头、空行和响应体数据组成</li>
-</ul>
-</li>
-<li>释放TCP连接<ul>
-<li>释放TCP连接由两种情况，一种建立的是长连接，建立的状态为KeepAlive，即建立长连接，则保留该连接一段时间，可以继续接受请求。如果连接模式为Close，即短连接，则在请求完成后服务器主动关闭TCP连接，客户端被动关闭连接。</li>
-</ul>
-</li>
-<li>客户端解析响应内容</li>
-</ol>
-<p>看了这个部分，接下来对这个工作原理做一个扩展，将这部分扩展到在浏览器中输入一个域名，直到网站内容出现的过程。</p>
-<h3><span id="网页加载过程分析">网页加载过程分析</span></h3><ol>
-<li>浏览器收到域名后，首先在浏览器本地查找是否由其对应的IP映射，如果不存在，开始查找本机缓存 =&gt; host =&gt; DNS服务器，直到解析URL对应的IP地址。这部分做的是DNS解析的工作。</li>
-<li>接下来解析完成后，与该IP地址建立TCP连接。</li>
-<li>浏览器发送请求报文，作为TCP三次握手的第三个报文的数据发送给服务器。</li>
-<li>服务器对请求做出响应，发送内容到客户端。</li>
-<li>服务器主动释放TCP连接。</li>
-<li>浏览器解析响应数据。</li>
-</ol>
-<h3><span id="http无状态">HTTP无状态</span></h3><p>http本身是无状态的，协议本身不保存之前请求或者响应报文的信息。为了实现状态保存的功能，引入了Cookie机制。</p>
-<h3><span id="http无连接">HTTP无连接</span></h3><p>HTTP本身无连接，处理完请求就断开连接了。但是后续http协议的更新支持一段时间内保持连接，保证在短时间内不会反复建立TCP连接。</p>
-<h3><span id="http方法">HTTP方法</span></h3><p>GET</p>
-<p>HEAD</p>
-<p>POST</p>
-<p>PUT</p>
-<p>DELETE</p>
-<p>TRACE</p>
-<p>OPTIONS</p>
-<p>CONNECT</p>
-<h3><span id="http状态码">HTTP状态码</span></h3><table>
-<thead>
-<tr>
-<th></th>
-<th>类别</th>
-<th>发生原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1XX</td>
-<td>信息性状态码</td>
-<td>接受的请求正在处理</td>
-</tr>
-<tr>
-<td>2XX</td>
-<td>成功状态码</td>
-<td>请求处理完成</td>
-</tr>
-<tr>
-<td>3XX</td>
-<td>重定向</td>
-<td>需要附加操作完成请求</td>
-</tr>
-<tr>
-<td>4XX</td>
-<td>客户端错误</td>
-<td>服务器无法处理请求</td>
-</tr>
-<tr>
-<td>5XX</td>
-<td>服务器错误状态码</td>
-<td>服务器请求出错</td>
-</tr>
-</tbody>
-</table>
-<p>常用的比如说404， 500 ，403， 200等。</p>
-<h3><span id="响应与请求报文构成">响应与请求报文构成</span></h3><h4><span id="请求报文构成">请求报文构成</span></h4><p>请求报文由4部分构成</p>
-<ol>
-<li>请求行<ul>
-<li>在请求行中，包含方法，URL，协议版本</li>
-</ul>
-</li>
-<li>请求头<ul>
-<li>请求头包含头数据，比如Host数据，Content-Type，Connection连接方式，内容长度等。</li>
-</ul>
-</li>
-<li>空行<ul>
-<li>将数据体和头分开</li>
-</ul>
-</li>
-<li>数据体<br> 包含请求数据</li>
-</ol>
-<h4><span id="响应报文构成">响应报文构成</span></h4><p>响应报文与请求报文类似，也是由4部分构成。</p>
-<ol>
-<li>状态行，包含协议版本，状态码，状态码描述。</li>
-<li>响应头，内含响应时间，响应长度，Content-type等数据。</li>
-<li>空行，仍然是分割作用</li>
-<li>响应体，响应的报文数据。</li>
-</ol>
-<h3><span id="http长连接">HTTP长连接</span></h3><p>HTTP的长连接机制是为了减少反复重新建立TCP连接而出现的，减少tcp连接可以减少socket的内核调用。相较于TCP长连接，TCP长连接的keepAlive机制则更有可能导致长时间的系统资源占用。</p>
-<h2><span id="https的基本工作原理">HTTPS的基本工作原理</span></h2><p>HTTPS工作在原本的HTTP的基础上，增加了SSL/TLS协议，共同组成HTTPS的加密数据传输方式。</p>
-<p>在HTTPS中，对称加密和非对称加密共同作用，数据使用对称加密传输，而对于对称加密中的密钥，采用非对称加密传输。</p>
-<p>在HTTPS传输过程中，涉及三个密钥。</p>
-<p>其中两个是服务端生成的公钥和私钥用来进行非对称加密。</p>
-<p>另一个是客户端生成的随机密钥，用来进行对称加密。</p>
-<p>具体流程如下描述：</p>
-<ol>
-<li><p>客户端向服务器发送HTTPS请求，连接到服务器的443端口。</p>
-</li>
-<li><p>服务器收到请求后，将自己手中的公钥发送给客户端。</p>
-</li>
-<li><p>客户端收到服务器的证书后，验证合法性，如果合法，就继续传输，如果不合法，就停止。在合法的情况下，客户端生成一个随机值，用于对称加密的密钥，第一次HTTP请求结束。</p>
-</li>
-<li><p>客户端发起第二个HTTP请求，使用公钥将自己生成的对称加密密钥加密发送给服务端。</p>
-</li>
-<li><p>服务器接收到密文后，使用私钥解密，得到明文的客户端生成的对称加密密钥，服务端将需要响应的数据使用对称加密算法加密，发送给客户端。</p>
-</li>
-<li><p>客户端收到密文，采用对称加密密钥解密得到数据，第二次HTTP请求完成，整个HTTPS请求也完成了。</p>
-</li>
-</ol>
-
+        <p>在分析https之前，首先要把http搞清楚。<br>
+        
+          <a class="article-more-a" href="/2020/09/02/https/#more">more >></a>
+        
       
 
       
@@ -1123,11 +1013,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color3">OS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">OS</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1143,19 +1033,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">https network</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java Cipher</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">https network</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java Cipher</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1179,6 +1069,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">SpringCloud</a>
               </li>
              
@@ -1188,10 +1082,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Springcloud</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Springboot</a>
               </li>
              
               <li class="article-tag-list-item">
