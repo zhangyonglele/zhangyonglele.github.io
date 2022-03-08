@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-15T11:32:27.127Z</updated>
+  <updated>2021-11-05T16:29:15.802Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>旅途漫漫，长夜将会通向何处</title>
+    <link href="http://yoursite.com/2021/11/05/2021-10-15/"/>
+    <id>http://yoursite.com/2021/11/05/2021-10-15/</id>
+    <published>2021-11-05T15:58:19.000Z</published>
+    <updated>2021-11-05T16:29:15.802Z</updated>
+    
+    <content type="html"><![CDATA[<p>距离上次好好写日记已经过去五个月了，时间如流水不是说说的，拿了三个月的工资，干了四个月的活，被清晨的阳光直射在双眼上叫醒，日复一日。</p><p>其实每天走在上班的路上，心里总是不断地会想，我到底为了什么来到这个地方。行走在这方圆三公里内，上不见苍天，下不见旷野，只能看到和我一样背负重担的人们，埋头向前，有人快乐，有人悲伤；有人满怀希望，有人坠入深渊。我以为我是一个能放下重担，去记录这个忙碌世界的人；可是到了这里，最终仍然是背起了这沉甸甸，记录的纸和笔也放在了一旁加入这忙碌里。走在深夜的望京，吃着便利店打折的关东煮，吹着京城冬日微凉的寒风，耳朵里塞着隔绝世界的音乐，看着别人分享的诗和远方。好像我也吃上了远在他乡的美食，住在几百平米的洋房，每天过着优雅的生活。就像海市蜃楼一样，在眼前，在天边；在手旁，也仅仅只是在手旁。</p><p>我开始问自己想要的是什么，一问，就是无尽的欲望。</p><p>这个世界没有那么多的价值可以追寻，追寻价值只不过是给自己的行为找的理由和借口，到头来，审视自己，给自己的问心无愧留下一条退路。我离开了校园，来到了一个追求欲望的世界，我也成为了欲望的一部分。</p><p>窗外是北风的狂欢，仿佛在为漂泊异乡的人们高歌，唱着一首回家的曲子，唱着一首能沿着路走看见阳光的曲子。当冬日暖阳从西方落下，狂欢的风们再次走向街头，唱着一曲又一曲；银杏的黄叶也为他伴奏，婆娑的灯影也为他起舞。在夜里，我也加入了他们，一起在路边巷尾忘情的肆意，短暂的忘记自己，让眼泪从眼角自由落体，成为冰冷世界的一枚铃铛。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;距离上次好好写日记已经过去五个月了，时间如流水不是说说的，拿了三个月的工资，干了四个月的活，被清晨的阳光直射在双眼上叫醒，日复一日。&lt;/p&gt;
+&lt;p&gt;其实每天走在上班的路上，心里总是不断地会想，我到底为了什么来到这个地方。行走在这方圆三公里内，上不见苍天，下不见旷野，只能看到
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>献给生活</title>
@@ -399,26 +423,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Java单例模式</title>
-    <link href="http://yoursite.com/2020/03/04/java-Singleton/"/>
-    <id>http://yoursite.com/2020/03/04/java-Singleton/</id>
-    <published>2020-03-04T14:11:12.000Z</published>
-    <updated>2020-03-21T07:25:37.526Z</updated>
-    
-    <content type="html"><![CDATA[<p>单例模式实际上很好理解，在一个Java程序中只有一个该Java对象，从头到尾这个对象只被实例化一次。这样就防止了对象被频繁的创建和销毁。</p><a id="more"></a><p>在实际应用中，Spring的对象实际上都是单例，所以很有可能出现线程不安全的操作，比如说在controller里使用属性变量，在并发的时候就可能出现线程不安全的操作。</p><p>为了实现单例模式，就必须将这个对象的构造方法私有化，否则其他的地方也可以获取这个对象就不再是单例模式了。</p><p>那如何获取到这个对象的实例呢，内部提供一个获取该对象的接口，通过这个接口来获取对象。</p><h3><span id="单例模式例子">单例模式例子</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest</span></span>&#123;</span><br><span class="line">    <span class="comment">//直接在类的加载阶段就实例化一个对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonTest instance = <span class="keyword">new</span> SingletonTest();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//私有化该对象的构造器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonTest <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后在其他函数中调用这个静态方法获取对象就可以了。</p><h2><span id="单例模式不同的实现方式">单例模式不同的实现方式</span></h2><p>单例模式有多种实现方式，拿出来一部分进行讲解。</p><h3><span id="懒汉式线程不安全实现">懒汉式线程不安全实现</span></h3><p>懒汉式线程不安全实现式最简单的实现方式之一，为什么叫懒汉式，因为在创建对象的时候并没有在创建的时候立刻将单例实例化，而是在第一次调用的时候才进行的实例化，所以在并发的时候就有可能出现线程不安全的情况。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonTest instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//私有化该对象的构造器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonTest <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance =  = <span class="keyword">new</span> SingletonTest();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3><span id="懒汉式线程安全实现">懒汉式线程安全实现</span></h3><p>只需要在原有的基础上将获取实例的方法进行同步化操作即可。但是效率太低，大部分的时候都不需要对方法进行同步。</p><p>优点是不会浪费空间，只有在第一次使用时才实例化。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonTest instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//私有化该对象的构造器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonTest <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            instance =  = <span class="keyword">new</span> SingletonTest();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3><span id="饿汉式实现">饿汉式实现</span></h3><p>饿汉式的意思就是这个人非常着急，等不到第一次使用才实例化，在类加载时就要把单例加载。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest</span></span>&#123;</span><br><span class="line">    <span class="comment">//直接在类的加载阶段就实例化一个对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonTest instance = <span class="keyword">new</span> SingletonTest();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//私有化该对象的构造器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonTest <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这种方式实现，效率很高，不用加锁，但是容易产生垃圾对象。在多种情况下都有可能出现类的加载，浪费空间。</p><h3><span id="双重校验锁">双重校验锁</span></h3><p>双重校验锁是线程安全懒汉式实现的优化，大幅度提高性能。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonTest</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonTest instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//私有化该对象的构造器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonTest <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (SingletonTest<span class="class">.<span class="keyword">class</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    instance = <span class="keyword">new</span> SingletonTest();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>这样一来，只有在并发的且实例未创建的时候才进入同步代码块，其他时候直接就可以获取到实例。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;单例模式实际上很好理解，在一个Java程序中只有一个该Java对象，从头到尾这个对象只被实例化一次。这样就防止了对象被频繁的创建和销毁。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
